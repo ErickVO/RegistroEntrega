@@ -1,5 +1,4 @@
 ﻿@page "/Registro"
-@page "/Registro/{Id:int}"
 
 @using Models
 @using BLL
@@ -57,7 +56,7 @@
     <div class-group>
         <button type="button" @onclick="Nuevo">Nuevo</button>
         <button type="submit" @onclick="Guardar">Guardar</button>
-        <button type="button" @onclick="Eliminar">Elimina</button>
+        <button type="button" @onclick="Eliminar">Eliminar</button>
     </div>
 
 </EditForm>
@@ -70,9 +69,7 @@
 
     protected override void OnInitialized()
     {
-        Nuevo(); //siempre se hace nuevo
-
-        Buscar(); //solo hace efecto si se paso un id por parametro
+        Nuevo();
     }
 
     private void Nuevo()
@@ -82,12 +79,33 @@
 
     private void Guardar()
     {
+        bool guardo;
 
+        Dato.Id = 1;
+        guardo = DatosBLL.Guardar(Dato);
+
+        if (guardo)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardado correctamente");
+        }
+        else
+            toast.ShowError("No fue posible guardar");
     }
 
     private void Eliminar()
     {
+        bool elimino;
 
+        elimino = DatosBLL.Eliminar(Dato.Id);
+
+        if (elimino)
+        {
+            Nuevo();
+            toast.ShowSuccess("Eliminado correctamente");
+        }
+        else
+            toast.ShowError("No fue posible eliminar");
     }
 
     private void Buscar()
