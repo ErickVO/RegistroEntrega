@@ -1,0 +1,90 @@
+﻿@page "/Registro"
+
+@using Models
+
+<h3>Registro</h3>
+
+<EditForm Model="Dato" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class-group>
+        <label>Id:</label>
+        <InputNumber @bind-Value="Dato.Id" />
+        <button type="button" @onclick="Buscar">Buscar</button>
+    </div>
+
+    <p />
+
+    <div class-group>
+        <label>Nombre:</label>
+        <InputText @bind-Value="Dato.Nombre" />
+    </div>
+
+    <p />
+
+    <div class-group>
+        <label>Telefono:</label>
+        <InputText @bind-Value="Dato.Telefono" />
+    </div>
+
+    <p />
+
+    <div class-group>
+        <label>Cedula:</label>
+        <InputText @bind-Value="Dato.Cedula" />
+    </div>
+
+    <p />
+
+    <div class-group>
+        <label>Direccion:</label>
+        <InputText @bind-Value="Dato.Direccion" />
+    </div>
+
+    <p />
+
+    <div class-group>
+        <label>Fecha de Nacimiento:</label>
+        <InputDate @bind-Value="Dato.FechaNacimiento" />
+    </div>
+
+    <p/>
+
+    <div class-group>
+        <button type="button" @onclick="Nuevo">Nuevo</button>
+        <button type="submit" @onclick="Guardar">Guardar</button>
+        <button type="button" @onclick="Eliminar">Elimina</button>
+    </div>
+
+</EditForm>
+
+@code {
+    Datos Dato = new Datos();
+
+    private void Limpiar()
+    {
+        Dato = new Datos();
+    }
+
+
+    private void Nuevo()
+    {
+        Limpiar();
+    }
+
+    private void Guardar()
+    {
+
+    }
+
+    private void Eliminar()
+    {
+
+    }
+
+    private void Buscar()
+    {
+
+    }
+
+}
