@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NuevoProyecto.BLL
 {
-    public class RegistroBLL
+    public class DatosBLL
     {
         public static bool Guardar(Datos datos)
         {
@@ -94,6 +94,27 @@ namespace NuevoProyecto.BLL
             }
 
             return paso;
+        }
+
+        public static Datos Buscar(int id)
+        {
+            Contexto contexto = new Contexto();
+            Datos datos;
+
+            try
+            {
+                datos = contexto.Datos.Find(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return datos;
         }
 
 

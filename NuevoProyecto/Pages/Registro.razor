@@ -1,6 +1,10 @@
 ﻿@page "/Registro"
+@page "/Registro/{Id:int}"
 
 @using Models
+@using BLL
+
+@inject IToastService toast
 
 <h3>Registro</h3>
 
@@ -48,7 +52,7 @@
         <InputDate @bind-Value="Dato.FechaNacimiento" />
     </div>
 
-    <p/>
+    <p />
 
     <div class-group>
         <button type="button" @onclick="Nuevo">Nuevo</button>
@@ -61,15 +65,19 @@
 @code {
     Datos Dato = new Datos();
 
-    private void Limpiar()
-    {
-        Dato = new Datos();
-    }
+    [Parameter]
+    public int EstudianteId { get; set; }
 
+    protected override void OnInitialized()
+    {
+        Nuevo(); //siempre se hace nuevo
+
+        Buscar(); //solo hace efecto si se paso un id por parametro
+    }
 
     private void Nuevo()
     {
-        Limpiar();
+        Dato = new Datos();
     }
 
     private void Guardar()
@@ -84,7 +92,15 @@
 
     private void Buscar()
     {
+        if (Dato.Id > 0)
+        {
+            var encontrado = DatosBLL.Buscar(Dato.Id);
 
+            if (encontrado != null)
+                this.Dato = encontrado;
+            else
+                toast.ShowWarning("No encontrado");
+        }
     }
 
 }
